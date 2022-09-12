@@ -1,0 +1,11 @@
+{{ object.event_title }}
+{{ object.event_slug }}
+{{ object.event_author }}
+{{ object.event_body }}
+{{ object.event_venue }}
+{{ object.event_address }}
+{{ object.event_city }}
+{{ object.event_state }}
+{{ object.event_organizer_name }}
+{{ object.event_sponsors }}
+{{ object.tags }}

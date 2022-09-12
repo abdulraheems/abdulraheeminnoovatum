@@ -1,0 +1,85 @@
+
+
+{% block content %}
+{% load highlight %}
+<div class="container" style="margin-top: 25px;">
+
+    <form method="get" action="/search/">
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" value="Search">
+                </td>
+            </tr>
+        </table>
+
+        {% if query %}
+            <h5 style="margin-top: 20px;">Search Results</h5>
+            
+            {% for result in page.object_list %}
+
+            <div class="card" style="margin-top: 15px;">
+
+            
+
+                
+                
+                <div class="card-body">
+                  <h5 class="card-title"><a href="http://localhost:8000/user/{{ result.object.profile_user }}">{{ result.object.profile_user }}</a></h5>
+                  <p class="card-text">{{ result.object.profile_aboutme |safe|truncatewords:"50"|linebreaks }}</p>
+                  
+                </div>
+                
+
+
+                
+                <div class="card-body">
+                    <h5 class="card-title"><a href="http://localhost:8000/user/{{ result.object.user }}">{{ result.object.user }}</a></h5>
+                    <p class="card-text">{{ result.object.post_text |safe|truncatewords:"50"|linebreaks }}</p>
+                    
+                  </div>
+                </div>
+              
+              
+              
+
+              
+              <div class="card-body">
+                <h5 class="card-title"><a href="{{ result.object.website_link }}">{{ result.object.website_title }}</a></h5>
+                <p class="card-text">{{ result.object.website_content |safe|truncatewords:"25"|linebreaks }}</p>
+                
+              </div>
+              
+              
+              
+              
+              
+              <div class="card-body">
+                <h5 class="card-title"><a href="{{ result.object.event_title }}">{{ result.object.event_title }}</a></h5>
+                <p class="card-text">{{ result.object.event_body |safe|truncatewords:"25"|linebreaks|capfirst }}</p>
+                <p class="btn btn-primary btn-sm">{{ result.object.event_venue }}</p>
+                <p class="btn btn-primary btn-sm">{{ result.object.event_start_date }}</p>
+              </div>
+              
+              
+              
+          </div>
+            {% empty %}
+                <p>No results found.</p>
+            {% endfor %}
+
+            {% if page.has_previous or page.has_next %}
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            {# Show some example queries to run, maybe query syntax, something else? #}
+        {% endif %}
+    </div>
+    </form>
+{% endblock %}

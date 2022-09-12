@@ -1,0 +1,3 @@
+{{ object.website_title }}
+{{ object.website_link }}
+{{ object.website_content }}
